@@ -73,19 +73,45 @@ const roll = document.getElementById("roll-btn");
 const diceBox = document.getElementById("dice");
 const pttHolder = document.getElementById("ptt-holder");
 let aValue;
+
 // variables & functions for landing page
 const landingBox = document.getElementById("landing-box");
 const gameMode = document.getElementsByClassName("game-mode");
 const gameModeText = document.getElementById("game-mode-text");
 const modeTextContainer = document.getElementById("mode-text-container");
+const inputBox = document.getElementById("input-container");
+const submit = document.getElementById("submit");
+
+let playerOneName = '';
+let playerTwoName = '';
+
+// Function to start the game and capture player names
+const startGame = () => {
+    playerOneName = document.getElementById('player-1-name').value || 'Player 1';
+    playerTwoName = document.getElementById('player-2-name').value || 'Player 2';
+
+        // Hide the input container after starting the game
+    document.getElementById('input-container').style.display = 'none';
+
+    start();
+};
+
+// Event listener for the submit button
+document.getElementById('submit').addEventListener('click', (e) => {
+    e.preventDefault();
+    startGame();
+});
 
 const singlePlayerMessage = () => {
     gameModeText.textContent = `You've selected Single Player Mode. "Start Game" to begin playing.`;
+    inputBox.style.visibility = "hidden";    
     modeTextContainer.style.visibility = "visible";
+
 };
 
 const multiplayerMessage = () => {
     gameModeText.textContent = `You've selected Two Player Mode. "Start Game" to begin playing.`;
+    inputBox.style.visibility = "visible";
     modeTextContainer.style.visibility = "visible";
 };
 
@@ -98,12 +124,12 @@ document.getElementById("player-2").addEventListener('click', multiplayerMessage
 
 const startSinglePlayer = () => {
     gameModeText.textContent = `Sorry, this feature is not available yet.`;
-    board.style.visibility = "visible"
 }
 
 const startTwoPlayer = () => {
     landingBox.style.display = "none";
     board.style.visibility = "visible"
+    
     
 }
 
@@ -121,6 +147,7 @@ const start = () => {
     }
 };
 
+playerTurnText.textContent = `Player 1 starts the game.`;
 const startBtn = document.getElementById("start-btn")
 startBtn.addEventListener('click', start);
 
@@ -207,13 +234,16 @@ const rollDice = () => {
     const animateMovement = (playerIcon, startPosition, endPosition) => {
         const move = (currentPosition) => {
             if (endPosition >= 36) {
+                endPosition = 36;
+
                 playerTurnText.textContent = "We have a winner!"
+                
+                document.getElementById(`${endPosition}`).appendChild(playerIcon);
             }
             if (currentPosition <= endPosition) {
                 document.getElementById(`${currentPosition}`).appendChild(playerIcon);
                 setTimeout(() => move(currentPosition + 1), 250);
             }
-
         };
         move(startPosition + 1);
     };
@@ -232,9 +262,9 @@ const rollDice = () => {
         if (turnToggle % 2 === 0) {
             animateMovement(playerTwoIcon, playerTwoPosition, playerTwoPosition+=value);
 
-            diceResult.textContent = `Player 2 scored ${value}`
-            console.log(`Player 2 moves to: ${playerTwoPosition}`)
-           playerTurnText.textContent = "Player 1's turn."
+            diceResult.textContent = `${playerTwoName} scored ${value}`
+            console.log(`${playerTwoName} moves to: ${playerTwoPosition}`)
+            playerTurnText.textContent = `${playerOneName}'s turn.`
            body.style.backgroundColor = "hsl(230, 77%, 36%)"
 
            diceResult.style.color = "hsl(0, 77%, 66%)"
@@ -254,9 +284,9 @@ const rollDice = () => {
         } else {
             animateMovement(playerOneIcon, playerOnePosition, playerOnePosition+=value);
 
-            diceResult.textContent = `Player 1 scored ${value}`
-            console.log(`Player One moves to: ${playerOnePosition}`)
-            playerTurnText.textContent = "Player 2's turn."
+            diceResult.textContent = `${playerOneName} scored ${value}`
+            console.log(`${playerTwoName} moves to: ${playerOnePosition}`)
+            playerTurnText.textContent = `${playerTwoName}'s turn.`
             body.style.backgroundColor = "hsl(0, 77%, 26%)"
 
             diceResult.style.color = "hsl(230, 77%, 76%)"
@@ -292,7 +322,6 @@ multiplayerGame()
 
 };
 
-playerTurnText.textContent = `Player 1 starts the game.`;
 playerTurnText.style.cssText = `
 
     justify-self: right;
