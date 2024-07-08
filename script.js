@@ -5,26 +5,11 @@ const counter = {
 
 const images = [];
 const tracker = [];
+
 // Board 
 const board = document.getElementById('board');
-// Selector for each cell on the board
+// Selector for cell on the board
 const cellOne = document.getElementById(`1`);
-const cellTwo = document.getElementById("2");
-const cellThree = document.getElementById("3");
-const cellFour = document.getElementById("4");
-const cellFive = document.getElementById("5");
-const cellSix = document.getElementById("6");
-const cellSeven = document.getElementById("7");
-const cellEight = document.getElementById("8");
-const cellNine = document.getElementById("9");
-const cellTen = document.getElementById("10");
-const cellEleven = document.getElementById("11");
-const cellTwelve = document.getElementById("12");
-const cellThirteen = document.getElementById("13");
-const cellFourteen = document.getElementById("14");
-const cellFifteen = document.getElementById("15");
-const cellSixteen = document.getElementById("16");
-
 
 
 // Create divs for player icons
@@ -35,9 +20,6 @@ playerOneIcon.id = "playerOne";
 playerTwoIcon.id = "playerTwo";
 CPUIcon.id = "cpu-icon";
 
-
-
-
 // Starting Blocks for player Icons
 cellOne.appendChild(playerOneIcon);
 cellOne.appendChild(playerTwoIcon);
@@ -46,21 +28,6 @@ cellOne.appendChild(CPUIcon);
 let playerOnePosition = 1
 let playerTwoPosition = 1
 let CPUPosition = 1 
-
-// const heading = document.getElementById("heading")
-
-// const rainbowLetters = (string) => {
-//     for (let i = 0; i < string.length; i++) {
-//         const letter = string[i]
-//         const span = document.createElement('span');
-//         span.textContent = letter;
-//         span.style.color = rbgNum();
-//         heading.appendChild(span);
-//         setTimeout(() => {
-//             span.style.color = "black";
-//         }, 1000);
-//     }
-// }
 
 // Dice function variables
 const diceButtonContainer = document.getElementById("dicexbutton-container");
@@ -90,7 +57,7 @@ const startGame = () => {
     playerOneName = document.getElementById('player-1-name').value || 'Player 1';
     playerTwoName = document.getElementById('player-2-name').value || 'Player 2';
 
-        // Hide the input container after starting the game
+    // Hide the input container after starting the game
     document.getElementById('input-container').style.display = 'none';
 
     start();
@@ -129,8 +96,6 @@ const startSinglePlayer = () => {
 const startTwoPlayer = () => {
     landingBox.style.display = "none";
     board.style.visibility = "visible"
-    
-    
 }
 
 const start = () => {
@@ -151,7 +116,7 @@ playerTurnText.textContent = `Player 1 starts the game.`;
 const startBtn = document.getElementById("start-btn")
 startBtn.addEventListener('click', start);
 
-// function to return random color via rgb
+// TODO function to return random color via rgb NOT used in this code yet.
 const rbgNum = () => {
     return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
 }
@@ -183,32 +148,32 @@ const rollDice = () => {
     
         case 1 :
         counter.one += 1;
-        images.push(`<img class="dice-face" src="dice-images/${value}.png" alt ="Dice ${value}">`);
+        images.push(`<img class="dice-face" src="${value}.png" alt ="Dice ${value}">`);
         break;
 
         case 2 :
         counter.two += 1;
-        images.push(`<img class="dice-face" src="dice-images/${value}.png" alt ="Dice ${value}">`);
+        images.push(`<img class="dice-face" src="${value}.png" alt ="Dice ${value}">`);
         break;
 
         case 3 :
         counter.three += 1;
-        images.push(`<img class="dice-face" src="dice-images/${value}.png" alt ="Dice ${value}">`);
+        images.push(`<img class="dice-face" src="${value}.png" alt ="Dice ${value}">`);
         break;
 
         case 4 :
         counter.four += 1;
-        images.push(`<img class="dice-face" src="dice-images/${value}.png" alt ="Dice ${value}">`);
+        images.push(`<img class="dice-face" src="${value}.png" alt ="Dice ${value}">`);
         break;
 
         case 5 :
         counter.five += 1;
-        images.push(`<img class="dice-face" src="dice-images/${value}.png" alt ="Dice ${value}">`);
+        images.push(`<img class="dice-face" src="${value}.png" alt ="Dice ${value}">`);
         break;
 
         case 6 :
         counter.six += 1;
-        images.push(`<img class="dice-face" src="dice-images/${value}.png" alt ="Dice ${value}">`);
+        images.push(`<img class="dice-face" src="${value}.png" alt ="Dice ${value}">`);
         // TODO ENTER SECOND ROLL HERE
         break;
     }
@@ -218,7 +183,7 @@ const rollDice = () => {
 
 // add the image to the html with each itertion of the event
     const diceFace = document.createElement('img');
-    diceFace.src = `dice-images/${value}.png`;
+    diceFace.src = `${value}.png`;
     diceFace.alt = `Dice ${value}`;
     diceFace.style.cssText = `
     z-index: 0;
@@ -235,8 +200,10 @@ const rollDice = () => {
         const move = (currentPosition) => {
             if (endPosition >= 36) {
                 endPosition = 36;
-
-                playerTurnText.textContent = "We have a winner!"
+                // ! FIX THIS 
+                body.backgroundColor = "hsl(230, 77%, 36%)" ? 
+                playerTurnText.textContent = "Player 2 Wins!" :
+                playerTurnText.textContent = "Player 1 Wins!"
                 
                 document.getElementById(`${endPosition}`).appendChild(playerIcon);
             }
