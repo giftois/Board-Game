@@ -59,6 +59,14 @@ let CPUPosition = 1
 //     }
 // }
 
+// Dice function variables
+const body = document.getElementById('body');
+const diceResult = document.getElementById('dice-result');
+const diceImages = document.getElementById('dice-images');
+const roll = document.getElementById("roll-btn");
+const diceBox = document.getElementById("dice");
+const pttHolder = document.getElementById("ptt-holder");
+
 // variables & functions for landing page
 const landingBox = document.getElementById("landing-box");
 const gameMode = document.getElementsByClassName("game-mode");
@@ -120,19 +128,12 @@ const rbgNum = () => {
 
 // function to be called with event initialiaation
 const rollDice = () => {
-    const body = document.getElementById('body');
-    const diceResult = document.getElementById('dice-result');
-    const diceImages = document.getElementById('dice-images');
-    const roll = document.getElementById("roll-btn");
-    const diceButtonContainer = document.getElementById("dicexbutton-container");
-    const diceBox = document.getElementById("dice");
 
-    diceResult.style.visibility = "visible";
 
-    diceButtonContainer.style.cssText = `
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    diceResult.style.cssText = `
+    visibility: visible;
+    color: white;
+    
     `;
 
     roll.style.cssText = `
@@ -209,13 +210,33 @@ const rollDice = () => {
             console.log(`Player 2 moves to: ${playerTwoPosition}`)
            playerTurnText.textContent = "Player 1's turn."
            body.style.backgroundColor = "darkblue"
+
+           diceButtonContainer.style.cssText = `
+           background-color: hsl(230, 77%, 66%);
+           box-shadow: hsl(230, 77%, 66%) 0px 0px 45px;
+           `
+
+           roll.style.cssText = `
+            background-color: hsl(230, 77%, 46%);
+           `
+           
+
         //    document.getElementById(`${playerTwoPosition}`).appendChild(playerTwo)
         } else {
             playerOnePosition += value;
             diceResult.textContent = `Player 1 scored a ${value}`
             console.log(`Player One moves to: ${playerOnePosition}`)
             playerTurnText.textContent = "Player 2's turn."
-            body.style.backgroundColor = "maroon"
+            body.style.backgroundColor = "hsl(0, 69%, 15%)"
+            
+            diceButtonContainer.style.cssText = `
+            background-color: maroon;
+            box-shadow: maroon 0px 0px 45px;
+            `
+            roll.style.cssText = `
+            background-color: hsl(0, 69%, 15%);
+            `
+
             // document.getElementById(`${playerOnePosition}`).appendChild(playerOne)
     
         }
@@ -264,9 +285,9 @@ playerTurnText.style.cssText = `
     justify-self: right;
     align-self: right;
     `
-diceButtonContainer.appendChild(playerTurnText);
+pttHolder.appendChild(playerTurnText);
 
-document.getElementById("roll-btn").addEventListener('click', rollDice);
+roll.addEventListener('click', rollDice);
 
 
 
