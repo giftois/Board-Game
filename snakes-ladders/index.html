@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snakes and Ladders</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="body">
+    
+    <section id="landing-box">
+        <div id="landing">
+            <header id="heading-container">
+                <h1 id="heading">Snakes and Ladders</h1>
+            </header>
+            <div id="controls">
+                <button id="start-btn">Start Game</button>
+                <button class="game-mode" id="player-1">Single Player (vs CPU)</button>
+                <button class="game-mode" id="player-2">2 Player (vs user)</button>
+            </div>
+            <div id="mode-text-container">
+                <h2 id="game-mode-text">Error: Please select a valid Game Mode</h2
+            </div>
+        </div>
+    </section>
+    <main class="grid">
+        <section id="board">
+            <div class="col col-1">
+                <div class="square row-4" id="16"></div>
+                <div class="square row-3" id="9"></div>
+                <div class="square row-2" id="8"></div>
+                <div class="square row-1" id="1"></div>
+            </div>
+            <div class="col col-3">
+                <div class="square row-4" id="15"></div>
+                <div class="square row-3" id="10"></div>
+                <div class="square row-2" id="7"></div>
+                <div class="square row-1" id="2"></div>
+            </div>
+            <div class="col col-2">
+                <div class="square row-4" id="14"></div>
+                <div class="square row-3" id="11"></div>
+                <div class="square row-2" id="6"></div>
+                <div class="square row-1" id="3"></div>
+            </div>
+            <div class="col col-4">
+                <div class="square row-4" id="13"></div>
+                <div class="square row-3" id="12"></div>
+                <div class="square row-2" id="5"></div>
+                <div class="square row-1" id="16"></div>
+            </div>
+        </section>
+        <section id="dicexbutton-container">        
+            <h2 id="dice-result">placeholder</h2>
+            <div id="dice">
+                <div id="image-container">
+                    <div id="dice-images"><img class="dice-face" src="dice-images/6.png" alt ="Dice ${value}"></div>
+                </div>
+            </div>
+            <button id="roll-btn" class="ptt-holder">Roll Dice</button>
+            <br><br><br >
+        </section>            
+
+    </main>
+<script src="script.js"></script>
+</body>
+</html>
