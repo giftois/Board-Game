@@ -61,6 +61,7 @@ let CPUPosition = 1
 
 // Dice function variables
 const body = document.getElementById('body');
+const diceResultContainer = document.getElementById('dice-result-container');
 const diceResult = document.getElementById('dice-result');
 const diceImages = document.getElementById('dice-images');
 const roll = document.getElementById("roll-btn");
@@ -133,7 +134,6 @@ const rollDice = () => {
     diceResult.style.cssText = `
     visibility: visible;
     color: white;
-    
     `;
 
     roll.style.cssText = `
@@ -146,7 +146,7 @@ const rollDice = () => {
     font-weight: bold;
     cursor: pointer;
     justify-content: right;
-`;
+    `;
 
     let value = Math.floor(Math.random() * 6 ) + 1;
 // switch to track each dice roll and display image with each event
@@ -202,39 +202,46 @@ const rollDice = () => {
     diceImages.appendChild(diceFace);
     turnToggle++
 
-
     const multiplayerGame = () => {
         if (turnToggle % 2 === 0) {
             playerTwoPosition += value;
-            diceResult.textContent = `Player 2 scored a ${value}`
+            diceResult.textContent = `Player 2 scored ${value}`
             console.log(`Player 2 moves to: ${playerTwoPosition}`)
            playerTurnText.textContent = "Player 1's turn."
-           body.style.backgroundColor = "darkblue"
+           body.style.backgroundColor = "hsl(230, 77%, 36%)"
+
+           diceResult.style.color = "hsl(0, 77%, 66%)"
 
            diceButtonContainer.style.cssText = `
            background-color: hsl(230, 77%, 66%);
-           box-shadow: hsl(230, 77%, 66%) 0px 0px 45px;
+           box-shadow: hsl(230, 77%, 66%) 0px 0px 15px;
            `
 
            roll.style.cssText = `
-            background-color: hsl(230, 77%, 46%);
+            background-color: hsl(230, 77%, 36%);
            `
-           
+           diceResultContainer.style.cssText = `
+           background-color: hsl(230, 77%, 36%);
+           `
 
-        //    document.getElementById(`${playerTwoPosition}`).appendChild(playerTwo)
         } else {
             playerOnePosition += value;
-            diceResult.textContent = `Player 1 scored a ${value}`
+            diceResult.textContent = `Player 1 scored ${value}`
             console.log(`Player One moves to: ${playerOnePosition}`)
             playerTurnText.textContent = "Player 2's turn."
-            body.style.backgroundColor = "hsl(0, 69%, 15%)"
+            body.style.backgroundColor = "hsl(0, 77%, 26%)"
+
+            diceResult.style.color = "hsl(230, 77%, 76%)"
             
             diceButtonContainer.style.cssText = `
-            background-color: maroon;
-            box-shadow: maroon 0px 0px 45px;
+            background-color: hsl(0, 77%, 66%);
+            box-shadow: hsl(0, 77%, 66%) 0px 0px 15px;
             `
             roll.style.cssText = `
-            background-color: hsl(0, 69%, 15%);
+            background-color: hsl(0, 77%, 26%);
+            `
+            diceResultContainer.style.cssText = `
+            background-color: hsl(0, 77%, 26%);
             `
 
             // document.getElementById(`${playerOnePosition}`).appendChild(playerOne)
@@ -275,11 +282,10 @@ const rollDice = () => {
 
 
 multiplayerGame()
-// Add hover effect to roll
-roll.classList.add("post-event-button");
+
 };
 
-playerTurnText.textContent = `Player 1 starts.`;
+playerTurnText.textContent = `Player 1 starts the game.`;
 playerTurnText.style.cssText = `
 
     justify-self: right;

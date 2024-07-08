@@ -141,7 +141,10 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 1rem;
+    background-color: hsl(230, 77%, 36%);
+    padding: 30px;
+    border-radius: 15px;
+    width: 100%;
 }
 
 #dice-result {
@@ -156,7 +159,7 @@ body {
     margin-left: 110px;
     background-color: hsl(230, 77%, 66%);
     border-radius: 25px;
-    box-shadow: hsl(230, 77%, 66%) 0px 0px 45px;
+    box-shadow: hsl(230, 77%, 66%) 0px 0px 15px;
     padding: 30px;
 }
 
@@ -176,6 +179,9 @@ button {
     justify-content: center;
     flex-direction: column;
     gap: 1rem;
+    max-width: 200px;
+    text-align: center;
+    height: 50px;
 
 }
 
