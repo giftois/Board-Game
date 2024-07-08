@@ -13,6 +13,7 @@ body {
     width: 100%;
 
 }
+
 #landing-box {
     left: 30px;
     right: 30px;
@@ -25,7 +26,6 @@ body {
     justify-content: center;
     align-items: center;
     border: black solid 1px;
-    display: none;
 
 }
 #landing {
@@ -84,19 +84,19 @@ body {
     flex-wrap: nowrap;
     flex-direction: row;
     max-width: 100%;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     padding: 30px;
 }
 
 #board {
-
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 0;
     border: goldenrod 11px groove;
     width: fit-content;
     height: fit-content;
+    visibility: hidden;
 }
 .square {
     display: flex;

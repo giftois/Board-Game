@@ -5,7 +5,8 @@ const counter = {
 
 const images = [];
 const tracker = [];
-
+// Board 
+const board = document.getElementById('board');
 // Selector for each cell on the board
 const cellOne = document.getElementById(`1`);
 const cellTwo = document.getElementById("2");
@@ -97,10 +98,13 @@ document.getElementById("player-2").addEventListener('click', multiplayerMessage
 
 const startSinglePlayer = () => {
     gameModeText.textContent = `Sorry, this feature is not available yet.`;
+    board.style.visibility = "visible"
 }
 
 const startTwoPlayer = () => {
     landingBox.style.display = "none";
+    board.style.visibility = "visible"
+    
 }
 
 const start = () => {
@@ -146,8 +150,7 @@ const rollDice = () => {
     `;
 
     let value = Math.floor(Math.random() * 6 ) + 1;
-    let aValue = value;
-
+    
 // switch to track each dice roll and display image with each event
     switch (value) {
     
@@ -201,6 +204,20 @@ const rollDice = () => {
     diceImages.appendChild(diceFace);
     turnToggle++
 
+    const animateMovement = (playerIcon, startPosition, endPosition) => {
+        const move = (currentPosition) => {
+            if (endPosition >= 36) {
+                playerTurnText.textContent = "We have a winner!"
+            }
+            if (currentPosition <= endPosition) {
+                document.getElementById(`${currentPosition}`).appendChild(playerIcon);
+                setTimeout(() => move(currentPosition + 1), 250);
+            }
+
+        };
+        move(startPosition + 1);
+    };
+
     const multiplayerGame = () => {
 
         playerOneIcon.style.cssText = `
@@ -211,12 +228,10 @@ const rollDice = () => {
         z-index: 99999;
         display: block;
         `
+        
         if (turnToggle % 2 === 0) {
-// I am trying to make the player Icon hope onto each square one by one until it reaches its destination at playerPosition+=value
-            for (let i = playerTwoPosition; i <= value; i++) {
-            }
+            animateMovement(playerTwoIcon, playerTwoPosition, playerTwoPosition+=value);
 
-            playerTwoPosition += value;
             diceResult.textContent = `Player 2 scored ${value}`
             console.log(`Player 2 moves to: ${playerTwoPosition}`)
            playerTurnText.textContent = "Player 1's turn."
@@ -237,7 +252,8 @@ const rollDice = () => {
            `
 
         } else {
-            playerOnePosition += value;
+            animateMovement(playerOneIcon, playerOnePosition, playerOnePosition+=value);
+
             diceResult.textContent = `Player 1 scored ${value}`
             console.log(`Player One moves to: ${playerOnePosition}`)
             playerTurnText.textContent = "Player 2's turn."
@@ -255,8 +271,6 @@ const rollDice = () => {
             diceResultContainer.style.cssText = `
             background-color: hsl(0, 77%, 26%);
             `
-
-            document.getElementById(`${playerOnePosition}`).appendChild(playerOne)
     
         }
         
