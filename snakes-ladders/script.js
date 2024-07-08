@@ -30,9 +30,11 @@ const cellSixteen = document.getElementById("16");
 const playerOneIcon = document.createElement("div");
 const playerTwoIcon = document.createElement("div");
 const CPUIcon = document.createElement("div");
+playerOneIcon.id = "playerOne";
+playerTwoIcon.id = "playerTwo";
+CPUIcon.id = "cpu-icon";
 
-const diceButtonContainer = document.getElementById("dicexbutton-container");
-let playerTurnText = document.createElement("h2");
+
 
 
 // Starting Blocks for player Icons
@@ -60,6 +62,8 @@ let CPUPosition = 1
 // }
 
 // Dice function variables
+const diceButtonContainer = document.getElementById("dicexbutton-container");
+let playerTurnText = document.createElement("h2");
 const body = document.getElementById('body');
 const diceResultContainer = document.getElementById('dice-result-container');
 const diceResult = document.getElementById('dice-result');
@@ -67,7 +71,7 @@ const diceImages = document.getElementById('dice-images');
 const roll = document.getElementById("roll-btn");
 const diceBox = document.getElementById("dice");
 const pttHolder = document.getElementById("ptt-holder");
-
+let aValue;
 // variables & functions for landing page
 const landingBox = document.getElementById("landing-box");
 const gameMode = document.getElementsByClassName("game-mode");
@@ -88,15 +92,11 @@ const multiplayerMessage = () => {
 // toggles whos turn it is 
 let turnToggle = 0;
 
-const vsUser = document.getElementById("player-2");
-
-
-
 document.getElementById("player-1").addEventListener('click', singlePlayerMessage);
 document.getElementById("player-2").addEventListener('click', multiplayerMessage);
 
 const startSinglePlayer = () => {
-    landingBox.style.display = "none";
+    gameModeText.textContent = `Sorry, this feature is not available yet.`;
 }
 
 const startTwoPlayer = () => {
@@ -107,14 +107,12 @@ const start = () => {
     if (gameModeText.textContent.includes("Single Player"))  {
         startSinglePlayer();
         playerOneIcon.style.display = "block";
-        CPUIcon.style.display = "block";
     } else if (gameModeText.textContent.includes("Two Player"))  {
         startTwoPlayer();
         playerOneIcon.style.display = "block";
         playerTwoIcon.style.display = "block";
-    } else if (gameModeText.textContent.includes("Error")) {
-        modeTextContainer.style.visibility = "visible"
     } else {
+        modeTextContainer.style.visibility = "visible"
         console.log("Error: Something is wrong");
     }
 };
@@ -129,7 +127,6 @@ const rbgNum = () => {
 
 // function to be called with event initialiaation
 const rollDice = () => {
-
 
     diceResult.style.cssText = `
     visibility: visible;
@@ -149,6 +146,8 @@ const rollDice = () => {
     `;
 
     let value = Math.floor(Math.random() * 6 ) + 1;
+    let aValue = value;
+
 // switch to track each dice roll and display image with each event
     switch (value) {
     
@@ -203,7 +202,20 @@ const rollDice = () => {
     turnToggle++
 
     const multiplayerGame = () => {
+
+        playerOneIcon.style.cssText = `
+        z-index: 99999;
+        `
+    
+        playerTwoIcon.style.cssText = `
+        z-index: 99999;
+        display: block;
+        `
         if (turnToggle % 2 === 0) {
+// I am trying to make the player Icon hope onto each square one by one until it reaches its destination at playerPosition+=value
+            for (let i = playerTwoPosition; i <= value; i++) {
+            }
+
             playerTwoPosition += value;
             diceResult.textContent = `Player 2 scored ${value}`
             console.log(`Player 2 moves to: ${playerTwoPosition}`)
@@ -244,31 +256,12 @@ const rollDice = () => {
             background-color: hsl(0, 77%, 26%);
             `
 
-            // document.getElementById(`${playerOnePosition}`).appendChild(playerOne)
+            document.getElementById(`${playerOnePosition}`).appendChild(playerOne)
     
         }
-        playerOneIcon.id = "playerOne";
-        playerTwoIcon.id = "playerTwo";
-    
         
     
-        playerOneIcon.style.cssText = `
-        width: 50px; height: 50px;
-        background-color: aqua;
-        border-radius: 10px;
-        border: solid black 2px;
-        z-index: 99999;
-        display: none;
-        `
-    
-        playerTwoIcon.style.cssText = `
-        width: 50px; height: 50px;
-        background-color: red;
-        border-radius: 25px;
-        border: solid black 2px;
-        z-index: 99999;
-        display: none;
-        `
+
         CPUIcon.style.cssText = `
         width: 50px; height: 50px;
         background-color: red;

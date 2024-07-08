@@ -25,6 +25,8 @@ body {
     justify-content: center;
     align-items: center;
     border: black solid 1px;
+    display: none;
+
 }
 #landing {
     display: flex;
@@ -37,7 +39,7 @@ body {
     background-color: aqua;
     gap: 1rem;
     flex-shrink: 1;
-    border: black solid 1px
+    border: black solid 1px;
 }
 
 #heading-container {
@@ -90,10 +92,10 @@ body {
 #board {
 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 0;
     border: goldenrod 11px groove;
-    width: 850px;
+    width: fit-content;
     height: fit-content;
 }
 .square {
@@ -105,8 +107,8 @@ body {
     color: black;
     border: 2px solid black;
     background-color: hsl(0, 0%, 90%);
-    height: 182px;
-    width: 207px;
+    height: 125px;
+    width: 125px;
     z-index: 0;
 
 }
@@ -209,6 +211,32 @@ button:active, .post-event-button:active {
     background-color: hsl(0, 0%, 90%);
     border-radius: 35px;
 }
+
+/* Game start */
+#playerOne {
+    width: 50px; height: 50px;
+    background-color: hsl(230, 77%, 66%);
+    box-shadow: hsl(230, 77%, 66%) 0 0 15px;
+    border-radius: 25px;
+    border: solid black 2px;
+}
+#playerTwo {
+    width: 50px; height: 50px;
+    background-color: hsl(0, 77%, 66%);
+    box-shadow: hsl(0, 77%, 66%) 0 0 15px;
+    border-radius: 25px;
+    border: solid black 2px;
+    display: none;
+}
+#cpu-icon {
+    width: 50px; height: 50px;
+    background-color: grey;
+    box-shadow: grey 0 0 15px;
+    border-radius: 25px;
+    border: solid black 2px;
+    display: none;
+}
+
 @media screen and (max-width: 500px) {
     .grid {
         flex-wrap: wrap;
