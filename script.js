@@ -207,8 +207,7 @@ const rollDice = () => {
     width: 250px;
     height: 250px;
     box-sizing: border-box; 
-    background-color: hsl(0, 0%, 90%);
-    border-radius: 38px;`
+    border-radius: 36px;`
 
     diceImages.appendChild(diceFace);
     turnToggle++
@@ -259,10 +258,11 @@ const rollDice = () => {
             background-color: hsl(230, 77%, 66%);
             box-shadow: hsl(230, 77%, 66%) 0px 0px 15px;
             `
+            diceFace.style.backgroundColor = "hsl(0, 77%, 85%)";
 
             diceBox.style.cssText = `
-            border: 5px solid hsl(0, 77%, 66%);
-            background-color: hsl(0, 77%, 26%);
+            border: 5px solid hsl(0, 77%, 26%);
+            background-color: hsl(0, 77%, 66%);
             `
 
             diceResultContainer.style.cssText = `
@@ -284,9 +284,11 @@ const rollDice = () => {
             box-shadow: hsl(0, 77%, 66%) 0px 0px 15px;
             `
 
+            diceFace.style.backgroundColor = "hsl(230, 77%, 85%)";
+
             diceBox.style.cssText = `
-            border: 5px solid hsl(230, 77%, 66%);
-            background-color: hsl(230, 77%, 26%);
+            border: 5px solid hsl(230, 77%, 26%);
+            background-color: hsl(230, 77%, 66%);
             `
 
             diceResultContainer.style.cssText = `

@@ -69,10 +69,16 @@ body {
     gap: 0;
     border: black 5px groove;
     width: 850px;
-    padding: 10px;
+    padding: 25px;
     height: fit-content;
     background-color: darkcyan;
 }
+.landing-button {
+    background-color: hsl(230, 77%, 36%);
+    color: white;
+    border: none;
+}
+
 #input-container {
     display: flex;
     flex-wrap: wrap;
@@ -108,7 +114,6 @@ label {
     text-align: center;
     font-size: 1.2rem;
     color: black;
-    visibility: hidden;
 }
 .grid {
     display: flex;
@@ -202,12 +207,11 @@ button {
     padding: 10px 20px;
     border-radius: 25px;
     border: none;
-    background-color: hsl(230, 77%, 36%);
-    color: white;
+    background-color: goldenrod;
+    color: black;
     font-weight: bold;
     cursor: pointer;
-    letter-spacing: 1px;
-    border: solid goldenrod 3px;
+    border: solid black 3px;
 }
 #ptt-holder {
     display: flex;
@@ -222,13 +226,13 @@ button {
 
 button:hover, .post-event-button:hover {
     background-color: hsl(127, 62%, 52%);
-    color: white;
+    color: black;
     transform: translateY(-2px);
 }
 button:active, .post-event-button:active {
     background-color: hsl(127, 62%, 62%);
-    color: white;
     transform: translateY(1px);
+    opacity: 0.5;
 }
     
 #dice-result {
