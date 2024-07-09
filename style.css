@@ -158,7 +158,37 @@ label {
     width: 125px;
     z-index: 0;
 }
-
+.ladder-images {
+position: absolute;
+}
+#ladder-1 {
+    height: 40%;
+    width: 40%;
+    z-index: 1;
+    left: 510px;
+    bottom: 20px;
+}
+#ladder-2 {
+    height: 40%;
+    width: 40%;
+    z-index: 1;
+    left: 10px;
+    bottom: 25px;
+}
+#ladder-3 {
+    height: 40%;
+    width: 40%;
+    z-index: 1;
+    left: 260px;
+    bottom: 270px;
+}
+#ladder-4 {
+    height: 40%;
+    width: 40%;
+    z-index: 1;
+    left: 10px;
+    bottom: 140px;
+}
 /* ? Dice styling */
 #dicexbutton-container {
 
