@@ -76,7 +76,7 @@ body {
 #input-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 0;
     width: 95%;
     padding: 30px;
@@ -93,10 +93,7 @@ input {
     background-color: hsl(0, 0%, 90%);
     text-align: center;
 }
-#submit {
-    align-self: end;
-    justify-self: end;
-}
+
 label {
     font-size: 1.3rem;
     height: fit-content;
@@ -144,9 +141,9 @@ label {
     height: 125px;
     width: 125px;
     z-index: 0;
-
 }
 
+/* ? Dice styling */
 #dicexbutton-container {
 
     display: flex;
@@ -186,6 +183,7 @@ label {
 #dice-result {
     color: white;
 }
+
 #dicexbutton-container {
     display: flex;
     align-items: center;
@@ -204,10 +202,12 @@ button {
     padding: 10px 20px;
     border-radius: 25px;
     border: none;
-    background-color: hsl(230, 77%, 45%);
+    background-color: hsl(230, 77%, 36%);
     color: white;
     font-weight: bold;
     cursor: pointer;
+    letter-spacing: 1px;
+    border: solid goldenrod 3px;
 }
 #ptt-holder {
     display: flex;
@@ -218,7 +218,6 @@ button {
     max-width: 200px;
     text-align: center;
     height: 50px;
-
 }
 
 button:hover, .post-event-button:hover {
@@ -229,7 +228,7 @@ button:hover, .post-event-button:hover {
 button:active, .post-event-button:active {
     background-color: hsl(127, 62%, 62%);
     color: white;
-    transform: translate
+    transform: translateY(1px);
 }
     
 #dice-result {
@@ -244,6 +243,10 @@ button:active, .post-event-button:active {
     box-sizing: border-box; 
     background-color: hsl(0, 0%, 90%);
     border-radius: 35px;
+}
+
+#rematch {
+    display: none;
 }
 
 /* Game start */
