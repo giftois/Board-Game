@@ -34,7 +34,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 70%;
+    height: 80%;
     width: 80%;
     background-color: aqua;
     gap: 1rem;
@@ -88,7 +88,7 @@ body {
     padding: 30px;
     height: fit-content;
     background-color: darkcyan;
-    visibility: hidden;
+    display: none;
 }
 input {
     font-size: 1.5rem;
@@ -98,14 +98,25 @@ input {
     height: fit-content;
     background-color: hsl(0, 0%, 90%);
     text-align: center;
+
 }
 
 label {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     height: fit-content;
-
+    font-weight: bold;
+    margin-right: 30px;
 }
+
+.player-1-name-label {
+    color: hsl(230, 77%, 36%);
+}
+.player-2-name-label {
+    color: hsl(0, 77%, 36%);
+}
+
 #mode-text-container {
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
