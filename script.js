@@ -39,7 +39,7 @@ const diceImages = document.getElementById('dice-images');
 const roll = document.getElementById("roll-btn");
 const diceBox = document.getElementById("dice");
 const pttHolder = document.getElementById("ptt-holder");
-let aValue;
+const rematch = document.getElementById("rematch")
 
 // variables & functions for landing page
 const landingBox = document.getElementById("landing-box");
@@ -63,11 +63,6 @@ const startGame = () => {
     start();
 };
 
-// Event listener for the submit button
-document.getElementById('submit').addEventListener('click', (e) => {
-    e.preventDefault();
-    startGame();
-});
 
 const singlePlayerMessage = () => {
     gameModeText.textContent = `You've selected Single Player Mode. "Start Game" to begin playing.`;
@@ -98,14 +93,36 @@ const startTwoPlayer = () => {
     board.style.visibility = "visible"
 }
 
+
 const start = () => {
+    // Rematch Code
+        rematch.style.display = "none";
+        // Starting Blocks for player Icons
+        cellOne.appendChild(playerOneIcon);
+        cellOne.appendChild(playerTwoIcon);
+        cellOne.appendChild(CPUIcon);
+        playerOnePosition = 1
+        playerTwoPosition = 1
+        CPUPosition = 1
+        roll.style.display = 'block';
+        playerTurnText.style.color = "white";
+        diceResult.style.visibility = "hidden";
+        if (playerTurnText.textContent === `${playerOneName} is the Winner!`) {
+            playerTurnText.textContent = playerTwoName + ' starts the next game.'
+        } else if (playerTurnText.textContent === `${playerTwoName} is the Winner!`) {
+            playerTurnText.textContent = playerOneName + ' starts the next game.';
+        }
+
     if (gameModeText.textContent.includes("Single Player"))  {
         startSinglePlayer();
         playerOneIcon.style.display = "block";
     } else if (gameModeText.textContent.includes("Two Player"))  {
+        playerOneName = document.getElementById('player-1-name').value || 'Player 1';
+        playerTwoName = document.getElementById('player-2-name').value || 'Player 2';
         startTwoPlayer();
         playerOneIcon.style.display = "block";
         playerTwoIcon.style.display = "block";
+
     } else {
         modeTextContainer.style.visibility = "visible"
         console.log("Error: Something is wrong");
@@ -121,27 +138,27 @@ const rbgNum = () => {
     return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
 }
 
+rematch.addEventListener('click', start)
+
 // function to be called with event initialiaation
 const rollDice = () => {
+    let value = Math.floor(Math.random() * 6 ) + 1;
+
+    const slowPlay = () => {
+            roll.style.visibility = 'hidden';
+
+        setTimeout(() => {
+            roll.style.visibility = 'visible';
+        }, 250 * value);
+        
+    }
+    slowPlay();
 
     diceResult.style.cssText = `
     visibility: visible;
     color: white;
     `;
 
-    roll.style.cssText = `
-    font-size: 1.5rem;
-    padding: 10px 20px;
-    border-radius: 25px;
-    border: none;
-    background-color: rgb(99, 122, 233);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    justify-content: right;
-    `;
-
-    let value = Math.floor(Math.random() * 6 ) + 1;
     
 // switch to track each dice roll and display image with each event
     switch (value) {
@@ -191,21 +208,23 @@ const rollDice = () => {
     height: 250px;
     box-sizing: border-box; 
     background-color: hsl(0, 0%, 90%);
-    border-radius: 35px;`
+    border-radius: 38px;`
 
     diceImages.appendChild(diceFace);
     turnToggle++
 
-    const animateMovement = (playerIcon, startPosition, endPosition) => {
+    const animateMovement = (playerIcon, startPosition, endPosition, playerName) => {
         const move = (currentPosition) => {
             if (endPosition >= 36) {
                 endPosition = 36;
-                // ! FIX THIS 
-                body.backgroundColor = "hsl(230, 77%, 36%)" ? 
-                playerTurnText.textContent = "Player 2 Wins!" :
-                playerTurnText.textContent = "Player 1 Wins!"
-                
+                playerTurnText.textContent = `${playerName} is the Winner!`
+                playerTurnText.style.cssText = `
+                color: goldenrod;
+                font-weight: bold;
+                `;
+                roll.style.display = `none`;
                 document.getElementById(`${endPosition}`).appendChild(playerIcon);
+                rematch.style.display = `block`;
             }
             if (currentPosition <= endPosition) {
                 document.getElementById(`${currentPosition}`).appendChild(playerIcon);
@@ -227,29 +246,31 @@ const rollDice = () => {
         `
         
         if (turnToggle % 2 === 0) {
-            animateMovement(playerTwoIcon, playerTwoPosition, playerTwoPosition+=value);
+            animateMovement(playerTwoIcon, playerTwoPosition, playerTwoPosition+=value, playerTwoName);
 
             diceResult.textContent = `${playerTwoName} scored ${value}`
             console.log(`${playerTwoName} moves to: ${playerTwoPosition}`)
             playerTurnText.textContent = `${playerOneName}'s turn.`
-           body.style.backgroundColor = "hsl(230, 77%, 36%)"
+            body.style.backgroundColor = "hsl(230, 77%, 36%)"
 
-           diceResult.style.color = "hsl(0, 77%, 66%)"
+            diceResult.style.color = "hsl(0, 77%, 66%)"
 
-           diceButtonContainer.style.cssText = `
-           background-color: hsl(230, 77%, 66%);
-           box-shadow: hsl(230, 77%, 66%) 0px 0px 15px;
-           `
+            diceButtonContainer.style.cssText = `
+            background-color: hsl(230, 77%, 66%);
+            box-shadow: hsl(230, 77%, 66%) 0px 0px 15px;
+            `
 
-           roll.style.cssText = `
+            diceBox.style.cssText = `
+            border: 5px solid hsl(0, 77%, 66%);
+            background-color: hsl(0, 77%, 26%);
+            `
+
+            diceResultContainer.style.cssText = `
             background-color: hsl(230, 77%, 36%);
-           `
-           diceResultContainer.style.cssText = `
-           background-color: hsl(230, 77%, 36%);
-           `
+            `
 
         } else {
-            animateMovement(playerOneIcon, playerOnePosition, playerOnePosition+=value);
+            animateMovement(playerOneIcon, playerOnePosition, playerOnePosition+=value, playerOneName);
 
             diceResult.textContent = `${playerOneName} scored ${value}`
             console.log(`${playerTwoName} moves to: ${playerOnePosition}`)
@@ -262,22 +283,19 @@ const rollDice = () => {
             background-color: hsl(0, 77%, 66%);
             box-shadow: hsl(0, 77%, 66%) 0px 0px 15px;
             `
-            roll.style.cssText = `
-            background-color: hsl(0, 77%, 26%);
+
+            diceBox.style.cssText = `
+            border: 5px solid hsl(230, 77%, 66%);
+            background-color: hsl(230, 77%, 26%);
             `
+
             diceResultContainer.style.cssText = `
             background-color: hsl(0, 77%, 26%);
             `
     
         }
-        
     
-
         CPUIcon.style.cssText = `
-        width: 50px; height: 50px;
-        background-color: red;
-        border-radius: 25px;
-        border: solid black 2px;
         z-index: 99999;
         display: none;
         `
@@ -289,11 +307,6 @@ multiplayerGame()
 
 };
 
-playerTurnText.style.cssText = `
-
-    justify-self: right;
-    align-self: right;
-    `
 pttHolder.appendChild(playerTurnText);
 
 roll.addEventListener('click', rollDice);
