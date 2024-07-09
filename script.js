@@ -65,15 +65,15 @@ const startGame = () => {
 
 
 const singlePlayerMessage = () => {
-    gameModeText.textContent = `You've selected Single Player Mode. "Start Game" to begin playing.`;
-    inputBox.style.visibility = "hidden";    
+    gameModeText.textContent = `You've selected Single Player Mode. Click "Start Game" to begin playing.`;
+    inputBox.style.display = "none";    
     modeTextContainer.style.visibility = "visible";
 
 };
 
 const multiplayerMessage = () => {
-    gameModeText.textContent = `You've selected Two Player Mode. "Start Game" to begin playing.`;
-    inputBox.style.visibility = "visible";
+    gameModeText.textContent = `You've selected Two Player Mode. Type your names then click "Start Game" to begin playing.`;
+    inputBox.style.display = "flex";
     modeTextContainer.style.visibility = "visible";
 };
 
@@ -124,8 +124,8 @@ const start = () => {
         playerTwoIcon.style.display = "block";
 
     } else {
-        modeTextContainer.style.visibility = "visible"
-        console.log("Error: Something is wrong");
+        gameModeText.textContent = "Please select a game mode to begin playing."
+        console.log("No game mode selected");
     }
 };
 
