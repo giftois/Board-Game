@@ -9,7 +9,8 @@ const tracker = [];
 // Board 
 const board = document.getElementById('board');
 // Selector for cell on the board
-const cellOne = document.getElementById(`1`);
+const cellZero = document.getElementById(`0`);
+const square = document.getElementsByClassName("square");
 
 
 // Create divs for player icons
@@ -21,9 +22,9 @@ playerTwoIcon.id = "playerTwo";
 CPUIcon.id = "cpu-icon";
 
 // Starting Blocks for player Icons
-cellOne.appendChild(playerOneIcon);
-cellOne.appendChild(playerTwoIcon);
-cellOne.appendChild(CPUIcon);
+cellZero.appendChild(playerOneIcon);
+cellZero.appendChild(playerTwoIcon);
+cellZero.appendChild(CPUIcon);
 
 let playerOnePosition = 1
 let playerTwoPosition = 1
@@ -98,9 +99,9 @@ const start = () => {
     // Rematch Code
         rematch.style.display = "none";
         // Starting Blocks for player Icons
-        cellOne.appendChild(playerOneIcon);
-        cellOne.appendChild(playerTwoIcon);
-        cellOne.appendChild(CPUIcon);
+        cellZero.appendChild(playerOneIcon);
+        cellZero.appendChild(playerTwoIcon);
+        cellZero.appendChild(CPUIcon);
         playerOnePosition = 1
         playerTwoPosition = 1
         CPUPosition = 1
@@ -224,11 +225,28 @@ const rollDice = () => {
                 roll.style.display = `none`;
                 document.getElementById(`${endPosition}`).appendChild(playerIcon);
                 rematch.style.display = `block`;
-            }
-            if (currentPosition <= endPosition) {
+            } // Below code doesnt work //
+            if (endPosition === 1) {
+                endPosition = 22;
+                currentPosition = 22;
+                document.getElementById(`${endPosition}`).appendChild(playerIcon);
+
+            } else if (endPosition === 5) {
+                endPosition = 15;
+                currentPosition = 15;
+                document.getElementById(`${endPosition}`).appendChild(playerIcon);
+
+            } else if (endPosition === 20) {
+                endPosition = 28;
+                currentPosition = 28;
+                document.getElementById(`${endPosition}`).appendChild(playerIcon);
+                
+            } // Above code doesnt work //
+            if (currentPosition < endPosition) {
                 document.getElementById(`${currentPosition}`).appendChild(playerIcon);
                 setTimeout(() => move(currentPosition + 1), 250);
             }
+            
         };
         move(startPosition + 1);
     };
@@ -273,7 +291,7 @@ const rollDice = () => {
             animateMovement(playerOneIcon, playerOnePosition, playerOnePosition+=value, playerOneName);
 
             diceResult.textContent = `${playerOneName} scored ${value}`
-            console.log(`${playerTwoName} moves to: ${playerOnePosition}`)
+            console.log(`${playerOneName} moves to: ${playerOnePosition}`)
             playerTurnText.textContent = `${playerTwoName}'s turn.`
             body.style.backgroundColor = "hsl(0, 77%, 26%)"
 
@@ -290,6 +308,7 @@ const rollDice = () => {
             border: 5px solid hsl(230, 77%, 26%);
             background-color: hsl(230, 77%, 66%);
             `
+
 
             diceResultContainer.style.cssText = `
             background-color: hsl(0, 77%, 26%);
