@@ -9,7 +9,7 @@ const tracker = [];
 // Board 
 const board = document.getElementById('board');
 // Selector for cell on the board
-const cellZero = document.getElementById(`0`);
+const cellOne = document.getElementById(`1`);
 const square = document.getElementsByClassName("square");
 
 
@@ -22,13 +22,14 @@ playerTwoIcon.id = "playerTwo";
 CPUIcon.id = "cpu-icon";
 
 // Starting Blocks for player Icons
+const cellZero = document.getElementById("0");
 cellZero.appendChild(playerOneIcon);
 cellZero.appendChild(playerTwoIcon);
 cellZero.appendChild(CPUIcon);
 
-let playerOnePosition = 1
-let playerTwoPosition = 1
-let CPUPosition = 1 
+let playerOnePosition = 0
+let playerTwoPosition = 0
+let CPUPosition = 0;
 
 // Dice function variables
 const diceButtonContainer = document.getElementById("dicexbutton-container");
@@ -99,12 +100,7 @@ const start = () => {
     // Rematch Code
         rematch.style.display = "none";
         // Starting Blocks for player Icons
-        cellZero.appendChild(playerOneIcon);
-        cellZero.appendChild(playerTwoIcon);
-        cellZero.appendChild(CPUIcon);
-        playerOnePosition = 1
-        playerTwoPosition = 1
-        CPUPosition = 1
+
         roll.style.display = 'block';
         playerTurnText.style.color = "white";
         diceResult.style.visibility = "hidden";
@@ -196,7 +192,6 @@ const rollDice = () => {
         break;
     }
     
-// empty image container to prevent multi-images loading
     diceImages.innerHTML = "";
 
 // add the image to the html with each itertion of the event
@@ -215,6 +210,36 @@ const rollDice = () => {
 
     const animateMovement = (playerIcon, startPosition, endPosition, playerName) => {
         const move = (currentPosition) => {
+
+            const ladderCheck = position => {
+                if (position === 2) {
+                    return 23;
+                } else if (position === 6) {
+                    return 16;
+                } else if (position === 21) {
+                    return 29;
+                }
+                return position;
+            }
+// move icons
+            if (currentPosition < endPosition) {
+                document.getElementById(`${currentPosition}`).appendChild(playerIcon);
+                setTimeout(() => move(currentPosition + 1), 250);
+// after icon moves, check for ladder
+            } else {
+                endPosition = ladderCheck(endPosition);
+                document.getElementById(`${endPosition}`).appendChild(playerIcon);
+
+                const newPosition = ladderCheck(endPosition);
+
+                if (newPosition !== endPosition) {
+                    endPosition = newPosition;
+                    document.getElementById(`${endPosition}`).appendChild(playerIcon);
+
+                    startPosition = endPosition;
+                }
+            }
+// icon reaches end? Display winner
             if (endPosition >= 36) {
                 endPosition = 36;
                 playerTurnText.textContent = `${playerName} is the Winner!`
@@ -225,28 +250,8 @@ const rollDice = () => {
                 roll.style.display = `none`;
                 document.getElementById(`${endPosition}`).appendChild(playerIcon);
                 rematch.style.display = `block`;
-            } // Below code doesnt work //
-            if (endPosition === 1) {
-                endPosition = 22;
-                currentPosition = 22;
-                document.getElementById(`${endPosition}`).appendChild(playerIcon);
 
-            } else if (endPosition === 5) {
-                endPosition = 15;
-                currentPosition = 15;
-                document.getElementById(`${endPosition}`).appendChild(playerIcon);
-
-            } else if (endPosition === 20) {
-                endPosition = 28;
-                currentPosition = 28;
-                document.getElementById(`${endPosition}`).appendChild(playerIcon);
-                
-            } // Above code doesnt work //
-            if (currentPosition < endPosition) {
-                document.getElementById(`${currentPosition}`).appendChild(playerIcon);
-                setTimeout(() => move(currentPosition + 1), 250);
-            }
-            
+            } 
         };
         move(startPosition + 1);
     };
