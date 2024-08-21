@@ -219,7 +219,7 @@ const rollDice = () => {
             // Move icons
             if (currentPosition < endPosition) {
                 document.getElementById(`${currentPosition}`).appendChild(playerIcon);
-                setTimeout(() => move(currentPosition + 1), 100);
+                setTimeout(() => move(currentPosition + 1), 150);
             // After icon moves, check for ladder
             } else {
                 endPosition = ladderCheck(endPosition);
